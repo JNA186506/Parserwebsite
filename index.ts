@@ -2,32 +2,25 @@ import { ParseExcelFile, RenderLotInfo } from "./parse";
 
 const dropArea = document.getElementById("drop-zone") as HTMLElement;
 const lotInfo = document.getElementById("lot-info") as HTMLElement;
-
 const showColumnsCheckbox = document.getElementById("show-columns-checkbox") as HTMLInputElement;
-
 const lotNumber = document.getElementById("lot-col") as HTMLInputElement;
 const bbNumber = document.getElementById("bb-col") as HTMLInputElement;
 const kgNumber = document.getElementById("kg-col") as HTMLInputElement;
-
 const startRowInput = document.getElementById("start-row") as HTMLInputElement;
+const fileInput = document.getElementById("file-input") as HTMLInputElement;
+
+let currentFile: File | null = null;
 
 function toggleColumnInputs() {
     const colInputs = document.querySelector(".col-inputs") as HTMLElement;
-    if (showColumnsCheckbox.checked) {
-        colInputs.classList.remove("hidden");
-    } else {
-        colInputs.classList.add("hidden");
-    }
+    colInputs.classList.toggle("hidden", !showColumnsCheckbox.checked);
 }
 
-showColumnsCheckbox.addEventListener("change", toggleColumnInputs);
-// User enters 1-based Excel column numbers; subtract 1 for 0-based array indices
 function parseColumnInputs(): { lotCol: number; bbCol: number; kgCol: number; startRow: number } {
     const lotCol = parseInt(lotNumber.value, 10) - 1;
     const bbCol = parseInt(bbNumber.value, 10) - 1;
     const kgCol = parseInt(kgNumber.value, 10) - 1;
     const startRow = parseInt(startRowInput.value, 10) - 1;
-
 
     if (isNaN(lotCol) || isNaN(bbCol) || isNaN(kgCol) || isNaN(startRow)) {
         throw new Error("Kolonneverdier må være gyldige tall.");
@@ -37,6 +30,7 @@ function parseColumnInputs(): { lotCol: number; bbCol: number; kgCol: number; st
 }
 
 async function handleFile(file: File) {
+    currentFile = file;
     try {
         const cols = parseColumnInputs();
         const lotMap = await ParseExcelFile(file, cols);
@@ -49,6 +43,11 @@ async function handleFile(file: File) {
     }
 }
 
+async function reparse() {
+    if (currentFile) await handleFile(currentFile);
+}
+
+showColumnsCheckbox.addEventListener("change", toggleColumnInputs);
 
 dropArea.addEventListener("dragover", (event) => {
     event.preventDefault();
@@ -66,22 +65,12 @@ dropArea.addEventListener("drop", async (event) => {
     if (file) await handleFile(file);
 });
 
-let currentFile: File | null = null;
-
-const fileInput = document.getElementById("file-input") as HTMLInputElement;
 fileInput.addEventListener("change", async () => {
     const file = fileInput.files?.[0];
-    if (file) {
-        currentFile = file;
-        await handleFile(file);
-    }
+    if (file) await handleFile(file);
 });
 
-async function handleFileReparse() {
-    if (currentFile) await handleFile(currentFile);
-}
-
-lotNumber.addEventListener("change", handleFileReparse);
-bbNumber.addEventListener("change", handleFileReparse);
-kgNumber.addEventListener("change", handleFileReparse);
-startRowInput.addEventListener("change", handleFileReparse);
+lotNumber.addEventListener("change", reparse);
+bbNumber.addEventListener("change", reparse);
+kgNumber.addEventListener("change", reparse);
+startRowInput.addEventListener("change", reparse);

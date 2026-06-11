@@ -32,10 +32,11 @@ jobs:
 
       - run: npm run build
 
-      - name: Prepare deployment folder
+      - name: Prepare site
         run: |
           mkdir _site
-          cp index.html style.css bundle.js _site/
+          cp index.html style.css _site/
+          cp -r dist _site/dist
           touch _site/.nojekyll
 
       - uses: actions/configure-pages@v5
