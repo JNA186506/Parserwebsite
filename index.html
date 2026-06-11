@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="dist/bundle.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+    <title>Parser Website</title>
+  </head>
+  <body>
+    <div id="root">
+      <fieldset id="file-input-fieldset">
+        <legend>Last inn fil</legend>
+
+        <input type="checkbox" id="show-columns-checkbox"/>
+        <label for="show-columns-checkbox">Endre kolonnevalg (Kun bruk hvis det er nødvendig!)</label>
+
+        <div class="col-inputs hidden">
+          <label for="lot-col">Lot-kolonne:</label>
+          <input type="number" class="cell-input" id="lot-col" value="11"/>
+
+          <label for="bb-col">Best Before-kolonne:</label>
+          <input type="number" class="cell-input" id="bb-col" value="17"/>
+
+          <label for="kg-col">KG-kolonne:</label>
+          <input type="number" class="cell-input" id="kg-col" value="19"/>
+           
+          <label for="start-row">Start-rad (1-baserte):</label>
+          <input type="number" class="cell-input" id="start-row" value="12"/>
+        </div>
+
+        <label id="drop-zone">Dra eller klikk for å velge en Excel-fil:
+          <br><br>
+          <input type="file" id="file-input" accept=".xlsx"/>
+        </label>
+
+        <div id="lot-info"></div>
+        <p><i>Hvis det er trøbbel, prøv shift+ctrl+r.</i></p>
+      </fieldset>
+    </div>
+  </body>
+</html>

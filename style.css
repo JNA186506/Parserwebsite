@@ -1,0 +1,99 @@
+body {
+  font-family: "Arial", sans-serif;
+  background-color: #18191b;
+    color: #ffffff;
+}
+
+.dragover {
+  border-color: #007bff;
+  background-color: #f0f8ff;
+}
+
+.warning {
+  color: red;
+  font-weight: bold;
+  margin-top: 1em;
+}
+
+.cell-input {
+  width: 10%;
+  padding: 0.5em;
+  box-sizing: border-box;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 650px;
+  height: 100vh;
+  margin: 0 auto;
+}
+
+#file-input-fieldset {
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  padding: 1em;
+  width: 70%;
+  max-width: 650px;
+}
+
+#drop-zone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 500px;
+  max-width: 100%;
+  height: 50px;
+  padding: 1em;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  color: slategray;
+  cursor: pointer;
+}
+
+#file-input {
+  display: none;
+}
+
+td, th {
+  border: 1px solid #cccccc;
+  padding: 0.5em;
+  text-align: left;
+}
+
+table {
+  border: 1px solid #cccccc;
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1em;
+}
+
+#lot-info {
+  padding: 1em;
+  margin-top: 1em;
+  width: 94%;
+}
+
+.hidden {
+  display: none;
+}

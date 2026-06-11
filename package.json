@@ -1,0 +1,24 @@
+{
+  "name": "parserwebsite",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack serve --mode development",
+    "build": "webpack --mode production"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "ts-loader": "^9.6.0",
+    "typescript": "^6.0.3",
+    "webpack": "^5.107.2",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.4"
+  },
+  "dependencies": {
+    "xlsx": "^0.18.5"
+  }
+}
