@@ -1,7 +1,6 @@
 node_modules/
 dist/
 bundle.js
-bundle.js.LICENSE.txt
 *.d.ts
 *.d.ts.map
 *.js.map
