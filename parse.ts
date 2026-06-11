@@ -14,7 +14,7 @@ export async function ParseExcelFile(
     { lotCol, bbCol, kgCol, startRow }: { lotCol: number; bbCol: number; kgCol: number; startRow: number }
 ): Promise<Map<number, Crate[]>> {
     const buffer = await file.arrayBuffer();
-    const workbook = XLSX.read(buffer, { type: "array", cellDates: true });
+    const workbook = XLSX.read(new Uint8Array(buffer), { type: "array", cellDates: true });
 
     const sheetName = workbook.SheetNames[0];
     if (!sheetName) throw new Error("Excel-filen må inneholde minst ett ark.");
