@@ -71,7 +71,10 @@ let currentFile: File | null = null;
 const fileInput = document.getElementById("file-input") as HTMLInputElement;
 fileInput.addEventListener("change", async () => {
     const file = fileInput.files?.[0];
-    if (file) await handleFile(file);
+    if (file) {
+        currentFile = file;
+        await handleFile(file);
+    }
 });
 
 async function handleFileReparse() {
@@ -82,12 +85,3 @@ lotNumber.addEventListener("change", handleFileReparse);
 bbNumber.addEventListener("change", handleFileReparse);
 kgNumber.addEventListener("change", handleFileReparse);
 startRowInput.addEventListener("change", handleFileReparse);
-Number.addEventListener("change", async () => {
-    const file = currFile;
-    if (file) await handleFile(file);
-});
-
-startRowInput.addEventListener("change", async () => {
-    const file = currFile;
-    if (file) await handleFile(file);
-});
